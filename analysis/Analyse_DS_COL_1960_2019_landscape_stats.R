@@ -14,7 +14,7 @@ library("sf")
 library("RColorBrewer")
 library("landdownscaleR")
 
-source("~/Projects/03_Disaggregate_land_use/03_downscale_landuse_src/data_analysis_scripts/Analyse_DS_COL_1960_2019_landscape_stats_functions.R")
+source("~/Projects/03_Disaggregate_land_use/LandScaleR-validation/analysis/Analyse_DS_COL_1960_2019_landscape_stats_functions.R")
 
 analysis_dir <- "~/Projects/03_Disaggregate_land_use/analysis/DS_methods_paper/20221010_HILDA_COL_DS_1960_2019/"
 input_dir <- "~/Projects/03_Disaggregate_land_use/data/interim/20221006_HILDA_LUC_Colombia_1960_2019/"

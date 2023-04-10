@@ -4,7 +4,7 @@ library("terra")
 library("ggplot2")
 library("landdownscaleR")
 
-source("~/Projects/03_Disaggregate_land_use/03_downscale_landuse_src/data_manipulation_scripts/Generate_half_degree_LUC_rasters_from_HILDA_functions.R")
+source("~/Projects/03_Disaggregate_land_use/LandScaleR-validation/data_manipulation/Generate_half_degree_LUC_rasters_from_HILDA_functions.R")
 
 data_dir <- "~/Projects/03_Disaggregate_land_use/data/interim/20211006_hildap_vGLOB-1.0-f_netcdf/hildap_vGLOB-1.0-f_netcdf/"
 
