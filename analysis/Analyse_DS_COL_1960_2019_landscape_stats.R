@@ -173,6 +173,7 @@ hilda_1960_colombia_pl <- ggplot() +
                 y = y, 
                 fill = LC)) +
   scale_fill_manual(values = discrete_LC_palette) +
+  scale_x_continuous(breaks = c(-82, -74, -68)) +
   guides(fill = guide_legend(nrow = 5)) +
   theme_classic() +
   theme(legend.position = "bottom",
@@ -180,9 +181,7 @@ hilda_1960_colombia_pl <- ggplot() +
         legend.key.size = unit(0.3, "cm"),
         plot.margin = margin(0, 0, 0, 0, unit = "pt"),
         axis.title = element_blank(),
-        axis.line = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank())
+        panel.background = element_blank())
 
 hilda_1960_colombia_pl
 
@@ -202,7 +201,7 @@ input_maps_plot <- ggarrange(hilda_1960_colombia_pl + theme(legend.text = elemen
                              label.args = list(gp = grid::gpar(fontface = 2,
                                                                fontsize = 14)))
 
-# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20221216_HILDA_Colombia_1960_1961_maps_tiff.tiff",
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230802_HILDA_Colombia_1960_1961_maps_tiff.tiff",
 #      height = 5.5,
 #      width = 7.4,
 #      units = "in",
@@ -211,13 +210,13 @@ input_maps_plot <- ggarrange(hilda_1960_colombia_pl + theme(legend.text = elemen
 # dev.off()
 # 
 # setEPS()
-# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20221216_HILDA_Colombia_1960_1961_maps_eps.eps",
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230802_HILDA_Colombia_1960_1961_maps_eps.eps",
 #            height = 5.5,
 #            width = 7.4)
 # input_maps_plot
 # dev.off()
 # 
-# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20221216_HILDA_Colombia_1960_1961_maps_pdf.pdf",
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230802_HILDA_Colombia_1960_1961_maps_pdf.pdf",
 #     height = 5.5,
 #     width = 7.4)
 # input_maps_plot
@@ -960,6 +959,7 @@ hilda_2019_colombia_pl <- ggplot() +
                 y = y, 
                 fill = X2019)) +
   scale_fill_manual(values = discrete_LC_palette[-6]) +
+  scale_x_continuous(breaks = c(-82, -74, -68)) +
   geom_sf(data = bogota_landscape_outline,
           colour = "black",
           fill = NA) +
@@ -970,9 +970,7 @@ hilda_2019_colombia_pl <- ggplot() +
         legend.key.size = unit(0.5, "cm"),
         plot.margin = margin(0, 0, 0, 0, unit = "pt"),
         axis.title = element_blank(),
-        axis.line = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank())
+        panel.background = element_blank())
 
 hilda_2019_colombia_pl
 
@@ -989,7 +987,7 @@ cropped_maps_2019_with_legend <- plot_grid(cropped_maps_2019,
                                            nrow = 2,
                                            rel_heights = c(1, 0.1))
 
-# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_Colombia_2019_cropped_maps_tiff.tiff",
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230802_HILDA_Colombia_2019_cropped_maps_tiff.tiff",
 #      height = 5,
 #      width = 7.4,
 #      units = "in",
@@ -998,13 +996,13 @@ cropped_maps_2019_with_legend <- plot_grid(cropped_maps_2019,
 # dev.off()
 # 
 # setEPS()
-# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_Colombia_2019_cropped_maps_eps.eps",
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230802_HILDA_Colombia_2019_cropped_maps_eps.eps",
 #            height = 5,
 #            width = 7.4)
 # cropped_maps_2019_with_legend
 # dev.off()
 # 
-# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_Colombia_2019_cropped_maps_pdf.pdf",
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230802_HILDA_Colombia_2019_cropped_maps_pdf.pdf",
 #     height = 5,
 #     width = 7.4)
 # cropped_maps_2019_with_legend
