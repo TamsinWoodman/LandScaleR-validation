@@ -13,6 +13,7 @@ library("rnaturalearth")
 library("sf")
 library("RColorBrewer")
 library("landdownscaleR")
+library("rcartocolor")
 
 source("~/Projects/03_Disaggregate_land_use/LandScaleR-validation/analysis/Analyse_DS_COL_1960_2019_landscape_stats_functions.R")
 
@@ -277,13 +278,13 @@ similarity_plot <- ggplot(data = similarity_summary,
                               ymax = mean_Similarity + sd_Similarity,
                               color = Allocation,
                               fill = Allocation)) +
-  geom_line() +
+  geom_line(lwd = 0.3) +
   geom_ribbon(color = NA,
               alpha = 0.2) +
-  scale_color_discrete(type = viridis(8)[2:8], 
+  scale_color_discrete(type = carto_pal(8, "Safe")[2:8],
                        name = "",
                        labels = alloc_methods_display) +
-  scale_fill_discrete(type = viridis(8)[2:8], 
+  scale_fill_discrete(type = carto_pal(8, "Safe")[2:8],
                       name = "",
                       labels = alloc_methods_display) +
   scale_x_continuous(name = "Year",
@@ -358,8 +359,9 @@ similarity_and_LUC_plot <- ggplot(similarity_and_LUC,
                                       y = diff_Similarity, 
                                       col = Allocation)) + 
   geom_point(alpha = 0.5,
-             shape = 16) +
-  scale_color_discrete(type = viridis(8)[2:8], 
+             shape = 16,
+             size = 1.1) +
+  scale_color_discrete(type = carto_pal(8, "Safe")[2:8], 
                        name = "",
                        labels = alloc_methods_display) +
   geom_hline(yintercept = 0,
@@ -383,7 +385,7 @@ similarity_combined_plot <- ggarrange(similarity_plot + theme(legend.text = elem
                                       label.args = list(gp = grid::gpar(fontface = 2,
                                                                         fontsize = 14)))
 
-# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_similarity_tiff.tiff",
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_similarity_tiff.tiff",
 #      height = 6,
 #      width = 5.5,
 #      units = "in",
@@ -392,13 +394,13 @@ similarity_combined_plot <- ggarrange(similarity_plot + theme(legend.text = elem
 # dev.off()
 # 
 # setEPS()
-# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_similarity_eps.eps",
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_similarity_eps.eps",
 #      height = 6,
 #      width = 5.5)
 # similarity_combined_plot
 # dev.off()
 # 
-# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_similarity_pdf.pdf",
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_similarity_pdf.pdf",
 #      height = 6,
 #      width = 5.5)
 # similarity_combined_plot
