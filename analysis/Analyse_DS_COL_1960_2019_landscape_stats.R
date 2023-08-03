@@ -564,7 +564,7 @@ landscape_plot <- plot_grid(landscape_plot_tmp,
                             nrow = 2,
                             rel_heights = c(1, 0.2))
 
-# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_Landscape_level_stats_tiff.tiff",
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_Landscape_level_stats_tiff.tiff",
 #      height = 6,
 #      width = 7.4,
 #      units = "in",
@@ -573,13 +573,13 @@ landscape_plot <- plot_grid(landscape_plot_tmp,
 # dev.off()
 # 
 # setEPS()
-# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_Landscape_level_stats_eps.eps",
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_Landscape_level_stats_eps.eps",
 #            height = 6,
 #            width = 7.4)
 # landscape_plot
 # dev.off()
 # 
-# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_HILDA_Landscape_level_stats_pdf.pdf",
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_Landscape_level_stats_pdf.pdf",
 #     height = 6,
 #     width = 7.4)
 # landscape_plot
@@ -668,7 +668,7 @@ pland_c_free_plot <- pland_c_plot + facet_wrap(vars(class),
                                                ncol = 4)
 pland_c_free_plot
 
-# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_Downscaled_land_percentage_tiff.tiff",
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_Downscaled_land_percentage_tiff.tiff",
 #      height = 5.5,
 #      width = 7.4,
 #      units = "in",
@@ -678,14 +678,14 @@ pland_c_free_plot
 # dev.off()
 # 
 # setEPS()
-# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_Downscaled_land_percentage_eps.eps",
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_Downscaled_land_percentage_eps.eps",
 #            height = 5.5,
 #            width = 7.4)
 # pland_c_free_plot + theme(legend.position = "bottom",
 #                      strip.text = element_text(size = 9))
 # dev.off()
 # 
-# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230215_Downscaled_land_percentage_pdf.pdf",
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_Downscaled_land_percentage_pdf.pdf",
 #     height = 5.5,
 #     width = 7.4)
 # pland_c_free_plot + theme(legend.position = "bottom",
@@ -850,7 +850,7 @@ class_metrics_plot_with_legend <- plot_grid(class_metrics_plot,
                                             ncol = 2,
                                             rel_widths = c(1, 0.3))
 
-# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230307_HILDA_Colombia_class_metrics_tiff.tiff",
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_Colombia_class_metrics_tiff.tiff",
 #      height = 7,
 #      width = 7.4,
 #      units = "in",
@@ -859,13 +859,13 @@ class_metrics_plot_with_legend <- plot_grid(class_metrics_plot,
 # dev.off()
 # 
 # setEPS()
-# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230307_HILDA_Colombia_class_metrics_eps.eps",
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_Colombia_class_metrics_eps.eps",
 #            height = 7,
 #            width = 7.4)
 # class_metrics_plot_with_legend
 # dev.off()
 # 
-# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230307_HILDA_Colombia_class_metrics__pdf.pdf",
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230803_HILDA_Colombia_class_metrics__pdf.pdf",
 #     height = 7,
 #     width = 7.4)
 # class_metrics_plot_with_legend

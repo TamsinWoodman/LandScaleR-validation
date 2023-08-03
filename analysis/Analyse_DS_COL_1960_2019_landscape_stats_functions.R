@@ -13,11 +13,11 @@ plotLandscapeMetric <- function(landscape_metric,
     geom_line() +
     geom_ribbon(color = NA,
                 alpha = 0.2) +
-    scale_color_discrete(type = viridis(8), 
+    scale_color_discrete(type = carto_pal(8, "Safe"), 
                          name = "",
                          labels = c("HILDA+",
                                     alloc_methods_display)) +
-    scale_fill_discrete(type = viridis(8), 
+    scale_fill_discrete(type = carto_pal(8, "Safe"), 
                         name = "",
                         labels = c("HILDA+",
                                    alloc_methods_display)) +
@@ -58,11 +58,11 @@ plotClassMetric <- function(class_metric,
                                       default = label_wrap_gen(20)),
                nrow = 3, 
                ncol = 4) + 
-    scale_color_discrete(type = viridis(8), 
+    scale_color_discrete(type = carto_pal(8, "Safe"), 
                          name = "",
                          labels = c("HILDA+",
                                     alloc_methods_display)) +
-    scale_fill_discrete(type = viridis(8), 
+    scale_fill_discrete(type = carto_pal(8, "Safe"), 
                         name = "",
                         labels = c("HILDA+",
                                    alloc_methods_display)) +
