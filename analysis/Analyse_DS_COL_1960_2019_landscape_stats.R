@@ -1092,3 +1092,182 @@ ds_fuzzy2_cropped_maps_2019_with_legend <- plot_grid(ds_fuzzy2_cropped_maps_2019
 #     width = 7.4)
 # ds_fuzzy2_cropped_maps_2019_with_legend
 # dev.off()
+
+##### Figure of Merit (Figures 4 and S2) #####
+
+# Load yearly Figure of Merit (FoM) datasets
+FoM_yearly_df <- data.frame()
+
+for (i in 1:length(alloc_methods)) {
+  
+  FoM_yearly_file_names <- paste0(analysis_dir,
+                                  "Sim",
+                                  simulations,
+                                  "_HILDA_DS_COL_",
+                                  alloc_methods[i],
+                                  "_FoM_yearly.csv")
+  
+  FoM_yearly_list <- lapply(FoM_yearly_file_names, 
+                            read.csv)
+  
+  FoM_yearly_tmp_df <- bind_rows(FoM_yearly_list,
+                                 .id = "simulation")
+  
+  FoM_yearly_tmp_df$allocation <- alloc_methods[i]
+  
+  FoM_yearly_df <- rbind(FoM_yearly_df,
+                         FoM_yearly_tmp_df)
+}
+
+# Process FoM data frame to remove "X" in front of each year and set 
+# column names
+FoM_yearly_df <- FoM_yearly_df %>% 
+  select(-c(X, layer))
+  
+colnames(FoM_yearly_df) <- c("Simulation",
+                             "Year",
+                             "FoM",
+                             "Allocation")
+
+FoM_yearly_df$Year <- sapply(strsplit(FoM_yearly_df$Year,
+                                      "X"),
+                             "[",
+                             2)
+FoM_yearly_df$Year <- as.numeric(FoM_yearly_df$Year)
+
+# Summarise FoM data by year and allocation method
+FoM_yearly_summary <- FoM_yearly_df %>%
+  group_by(Allocation, Year) %>%
+  summarise(mean_FoM = mean(FoM), 
+            sd_FoM = sd(FoM))
+
+# Find maximum and minimum values of mean FoM
+max(FoM_yearly_summary$mean_FoM)
+min(FoM_yearly_summary$mean_FoM)
+
+# Generate plot of FoM over time and by allocation method
+FoM_yearly_plot <- ggplot(data = FoM_yearly_summary,
+                          aes(x = Year,
+                              y = mean_FoM,
+                              ymin = mean_FoM - sd_FoM,
+                              ymax = mean_FoM + sd_FoM,
+                              color = Allocation,
+                              fill = Allocation)) +
+  geom_line(lwd = 0.3) +
+  geom_ribbon(color = NA,
+              alpha = 0.2) +
+  scale_color_discrete(type = carto_pal(8, "Safe")[2:8],
+                       name = "",
+                       labels = alloc_methods_display) +
+  scale_fill_discrete(type = carto_pal(8, "Safe")[2:8],
+                      name = "",
+                      labels = alloc_methods_display) +
+  scale_x_continuous(name = "Year",
+                     breaks = c(1960, 1980, 2000, 2020),
+                     labels = c("1960", "1980", "2000", "2020")) +
+  ylab(expression("Figure of Merit (%)")) +
+  theme_bw() + 
+  theme(panel.grid = element_blank(),
+        axis.title.y = element_text(vjust = 3),
+        plot.margin = margin(t = 5.5, r = 5.5, b = 5.5, l = 15, unit = "pt"))
+FoM_yearly_plot
+
+# Load overall Figure of Merit (FoM) datasets
+FoM_df <- data.frame()
+
+for (i in 1:length(alloc_methods)) {
+  
+  FoM_file_names <- paste0(analysis_dir,
+                           "Sim",
+                           simulations,
+                           "_HILDA_DS_COL_",
+                           alloc_methods[i],
+                           "_FoM.csv")
+  
+  FoM_list <- lapply(FoM_file_names, 
+                     read.csv)
+  
+  FoM_tmp_df <- bind_rows(FoM_list,
+                          .id = "simulation")
+  
+  FoM_tmp_df$allocation <- alloc_methods[i]
+  
+  FoM_df <- rbind(FoM_df,
+                  FoM_tmp_df)
+}
+
+# Process FoM data frame to remove "X" in front of each year and set 
+# column names
+FoM_df <- FoM_df %>% 
+  select(-c(X, layer))
+
+colnames(FoM_df) <- c("Simulation",
+                      "Year",
+                      "FoM",
+                      "Allocation")
+
+FoM_df$Year <- sapply(strsplit(FoM_df$Year,
+                               "X"),
+                      "[",
+                      2)
+FoM_df$Year <- as.numeric(FoM_df$Year)
+
+# Create boxplot of FoM across the entire study period
+FoM_plot <- ggplot(data = FoM_df,
+       aes(x = Allocation,
+           y = FoM,
+           col = Allocation)) +
+  geom_boxplot() +
+  scale_color_discrete(type = carto_pal(8, "Safe")[2:8],
+                                      name = "",
+                                      labels = alloc_methods_display) +
+  scale_fill_discrete(type = carto_pal(8, "Safe")[2:8],
+                      name = "",
+                      labels = alloc_methods_display) +
+  scale_y_continuous(breaks = seq(22, 34, 2)) +
+  xlab("Allocation method") +
+  ylab("Figure of Merit (%)") +
+  theme_bw() + 
+  theme(panel.grid = element_blank(),
+        axis.title.y = element_text(vjust = 3),
+        plot.margin = margin(t = 5.5, r = 5.5, b = 5.5, l = 15, unit = "pt"),
+        axis.text.x = element_blank())
+FoM_plot
+
+# Check mean FoM for each allocation method
+FoM_df_summary <- FoM_df %>%
+  group_by(Allocation) %>%
+  summarise(mean_FoM = mean(FoM),
+            sd_FoM = sd(FoM))
+
+# Create figure showing yearly FoM and FoM across the entire study period (Figure 4)
+FoM_combined_plot <- ggarrange(FoM_yearly_plot + theme(legend.text = element_text(size = 11),
+                                                axis.title = element_text(size = 12)),
+                               FoM_plot + theme(legend.text = element_text(size = 11),
+                                                axis.title = element_text(size = 12)),
+                               nrow = 2,
+                               labels = c("a)", "b)"),
+                               label.args = list(gp = grid::gpar(fontface = 2,
+                                                                 fontsize = 14)))
+# tiff("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230809_HILDA_FoM_tiff.tiff",
+#      height = 6,
+#      width = 5.5,
+#      units = "in",
+#      res = 300)
+# FoM_combined_plot
+# dev.off()
+# 
+# setEPS()
+# postscript("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230809_HILDA_FoM_eps.eps",
+#      height = 6,
+#      width = 5.5)
+# FoM_combined_plot
+# dev.off()
+# 
+# pdf("~/Projects/03_Disaggregate_land_use/figures/03_Downscaling_methods_paper/20230809_HILDA_FoM_pdf.pdf",
+#      height = 6,
+#      width = 5.5)
+# FoM_combined_plot
+# dev.off()
+
+
